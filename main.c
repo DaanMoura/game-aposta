@@ -22,6 +22,11 @@ int main()
         printf("Dinheiro: $%.2f\n", money);
         printf("Faça a sua aposta:\n  >> ");
         scanf("%f", &deal);
+        while(deal>money)
+        {
+            printf("Dinheiro insuficiente. Faça outra aposta\n  >> ");
+            scanf("%f", &deal);
+        }
 
         A=rand()%5;
         B=rand()%5;
