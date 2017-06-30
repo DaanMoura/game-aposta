@@ -20,19 +20,27 @@ int main()
     do
     {
         printf("Dinheiro: $%.2f\n", money);
-        printf("Faça a sua aposta:\n  >> ");
-        scanf("%f", &deal);
-        while(deal>money || deal<1)
+        if(money<1)
         {
-            if(deal>money)
-            {
-                printf("Dinheiro insuficiente. Faça outra aposta\n  >> ");
-            }
-            else
-            {
-                printf("A aposta mínima é $1. Faça outra aposta\n  >> ");
-            }
+            deal=money;
+            printf("Você tem menos que $1\nAposta automática: $%.2f\n", deal);
+        }
+        else
+        {
+            printf("Faça a sua aposta:\n  >> ");
             scanf("%f", &deal);
+            while(deal>money || deal<1)
+            {
+                if(deal>money)
+                {
+                    printf("Dinheiro insuficiente. Faça outra aposta\n  >> ");
+                }
+                else
+                {
+                    printf("A aposta mínima é $1. Faça outra aposta\n  >> ");
+                }
+                scanf("%f", &deal);
+            }
         }
 
         A=rand()%5;
