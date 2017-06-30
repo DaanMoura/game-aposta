@@ -22,9 +22,16 @@ int main()
         printf("Dinheiro: $%.2f\n", money);
         printf("Faça a sua aposta:\n  >> ");
         scanf("%f", &deal);
-        while(deal>money)
+        while(deal>money || deal<1)
         {
-            printf("Dinheiro insuficiente. Faça outra aposta\n  >> ");
+            if(deal>money)
+            {
+                printf("Dinheiro insuficiente. Faça outra aposta\n  >> ");
+            }
+            else
+            {
+                printf("A aposta mínima é $1. Faça outra aposta\n  >> ");
+            }
             scanf("%f", &deal);
         }
 
