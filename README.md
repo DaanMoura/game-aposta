@@ -1,5 +1,5 @@
 # game-aposta
-Trabalho de Construção de Algoritmos e Programas - Profa Vânia Neris (BCC 2017)
+Trabalho de Construção de Algoritmos e Programas - Profa Vânia Neris (BCC 2017 - UFSCar)
 
 -Começa com um dinheiro aleatório de $10 a $100<br>
 -Objetivo: conseguir $1000<br>
