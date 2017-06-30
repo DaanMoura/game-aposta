@@ -4,7 +4,7 @@
 
 int main()
 {
-    int A, B, X, Y;
+    int A, B, X, Y, i;
     float money, deal, aux;
     //Começa com um dinheiro aleatório de $10 a $100
     //Objetivo: conseguir $1000
@@ -17,8 +17,10 @@ int main()
 
     srand(time(NULL));
     money=rand()%91 + 10;
+    i=1;
     do
     {
+        printf("\tJogo %d\n", i);
         printf("Dinheiro: $%.2f\n", money);
         if(money<1)
         {
@@ -49,7 +51,7 @@ int main()
         printf("Qual o seu palpite?\n  >> ");
         scanf("%d %d", &X, &Y);
 
-        printf("Placar: %d x %d\n", A, B);
+        printf("Placar: %d x %d\n\n", A, B);
         if(X==A && Y==B)
         {
             aux=deal;
@@ -72,7 +74,8 @@ int main()
         }
 
         money=money+aux;
-        printf("\n---------\n");
+        i++;
+        printf("\n\n\n");
 
     }while(money>0 && money<1000);
     if(money<=0)
