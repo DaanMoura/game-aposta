@@ -14,6 +14,7 @@ int main()
     //Se errar tudo, perde o que apostou
     //Perde se zerar o dinheiro
     //Ganha se conseguir o objetivo($1000)
+    //TESTE GIT
 
     srand(time(NULL));
     money=rand()%91 + 10;
