@@ -4,7 +4,8 @@
 
 int main()
 {
-    int A, B, X, Y, i;
+    int A, B, X, Y, i, j;
+    char times[51][50];
     float money, deal, aux;
     //Começa com um dinheiro aleatório de $10 a $100
     //Objetivo: conseguir $1000
@@ -16,12 +17,22 @@ int main()
     //Ganha se conseguir o objetivo($1000)
     //TESTE GIT
 
+    FILE *arquivo = fopen("time.txt", "r");
+    j=1;
+    while(fscanf(arquivo, "%s", times[j])!=EOF)
+    {
+        j++;
+    }
+    fclose(arquivo);
+
     srand(time(NULL));
     money=rand()%91 + 10;
+    j=1;
     i=1;
     do
     {
         printf("\tJogo %d\n", i);
+        printf("%s\n", times[j]);
         printf("Dinheiro: $%.2f\n", money);
         if(money<1)
         {
@@ -76,6 +87,7 @@ int main()
 
         money=money+aux;
         i++;
+        j++;
         printf("\n\n\n");
 
     }while(money>0 && money<1000);
