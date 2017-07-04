@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+//Caractere invisível: >>ㅤ<<
 int main()
 {
-    int A, B, X, Y, i, j;
+    int A, B, X, Y, i, T;
     char times[51][50];
     float money, deal, aux;
     //Começa com um dinheiro aleatório de $10 a $100
@@ -18,21 +19,21 @@ int main()
     //TESTE GIT
 
     FILE *arquivo = fopen("time.txt", "r");
-    j=1;
-    while(fscanf(arquivo, "%s", times[j])!=EOF)
+    T=0;
+    while(fscanf(arquivo, "%s", times[T])!=EOF)
     {
-        j++;
+        T++;
     }
     fclose(arquivo);
 
     srand(time(NULL));
     money=rand()%91 + 10;
-    j=1;
     i=1;
     do
     {
+        T=rand()%11;
         printf("\tJogo %d\n", i);
-        printf("%s\n", times[j]);
+        printf("%s\n", times[T]);
         printf("Dinheiro: $%.2f\n", money);
         if(money<1)
         {
@@ -87,7 +88,6 @@ int main()
 
         money=money+aux;
         i++;
-        j++;
         printf("\n\n\n");
 
     }while(money>0 && money<1000);
