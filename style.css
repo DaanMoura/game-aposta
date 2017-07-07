@@ -1,0 +1,33 @@
+*{
+text-align: center;
+font-family: helvetica;
+}
+
+h1{
+  font-variant:small-caps;
+  background-color: #196c0e;
+  color:#b1ea99;
+  margin:3 auto;
+  margin-left:30%;
+  margin-right:30%;
+  border-style:double;
+  border-radius: 10px;
+}
+
+#regras ul{
+  text-align-last:left;
+  margin:0 auto;
+  //list-style:none;
+  margin-left: 20%;
+  margin-right: 20%;
+  
+}
+
+li{
+  padding: 2px;
+  margin-left: 2%;
+  margin-right: 10%;
+}
+
+
+
