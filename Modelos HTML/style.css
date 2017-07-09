@@ -1,3 +1,5 @@
+/*IMAGEM USADA: https://images.alphacoders.com/482/thumb-1920-482000.jpg*/
+
 *{
 text-align: center;
 font-family: helvetica;
@@ -17,7 +19,6 @@ h1{
 #regras ul{
   text-align-last:left;
   margin:0 auto;
-  //list-style:none;
   margin-left: 20%;
   margin-right: 20%;
   
@@ -28,6 +29,20 @@ li{
   margin-left: 2%;
   margin-right: 10%;
 }
+
+body{
+  background-image: url(https://images.alphacoders.com/482/thumb-1920-482000.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+div.fundo{
+  background: rgba( 255, 255, 255, 0.548 );
+  border-style:solid;
+  border-color:#196c0e;
+  border-radius: 10px;
+}
+
 
 
 
