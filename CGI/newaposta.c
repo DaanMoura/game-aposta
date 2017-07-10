@@ -27,6 +27,7 @@ int main()
     printf("</head>");
 
     printf("<body>");
+    printf("<div class=fundo>");
     printf("<h1>Bolão Virtual</h1>");
     printf("<div id=jogo>");
     //printf("<h2>%s</h2>", times[T]); //TIME
@@ -39,6 +40,7 @@ int main()
     printf("</form>");
     printf("</div>");
     printf("<a href=\"http://cap.dc.ufscar.br/~743525/game.html\"><h2>Início</h2></a>\n");
+    printf("</div>");
     printf("</body>");
     printf("</html>");
 

@@ -23,8 +23,15 @@ int main()
     float money=lerDinheiro();
     float deal;
 
-    pData=getenv("QUERY_STRING");
-    sscanf(pData, "x=%f", &deal);
+    if(money>=1)
+    {
+        pData=getenv("QUERY_STRING");
+        sscanf(pData, "x=%f", &deal);
+    }
+    else
+    {
+        deal=money;
+    }
 
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
@@ -37,16 +44,26 @@ int main()
     printf("</head>");
 
     printf("<body>");
+    printf("<div class=fundo>");
     printf("<h1>Bolão Virtual</h1>");
-    if(money<1)
+    if(deal>money)
     {
-        deal=money;
+        printf("<p>Dinheiro insuficiente. Faça outra aposta</p>");
+        printf("<a href=\"newaposta.cgi\">continuar</a>");
+    }
+    else if(deal<1 && money>=1)
+    {
+        printf("<p>A aposta mínima é $1. Faça outra aposta</p>");
+        printf("<a href=\"newaposta.cgi\">continuar</a>");
+    }
+    else
+    {
         printf("<div id=jogo>");
         //printf("<h2>%s</h2>", times[T]); //TIME
         printf("<b>Dinheiro: $%.2f</b><br>", money); //Dinheiro
         printf("<b>Aposta: $%.2f</b>", deal);
         //Formulario
-        printf("<form action=\"\">");
+        printf("<form action=\"resposta.cgi\">");
         printf("Qual o seu palpite?<br>");
         printf("<select name=\"a\">");
         printf("<option value=\"0\" selected>0");
@@ -67,48 +84,8 @@ int main()
         printf("</form>");
         printf("</div>");
     }
-    else
-    {
-        if(deal>money)
-        {
-            printf("<p>Dinheiro insuficiente. Faça outra aposta</p>");
-            printf("<a href=\"newaposta.cgi\">continuar</a>");
-        }
-        else if(deal<1)
-        {
-            printf("<p>A aposta mínima é $1. Faça outra aposta</p>");
-            printf("<a href=\"newaposta.cgi\">continuar</a>");
-        }
-        else
-        {
-            printf("<div id=jogo>");
-            //printf("<h2>%s</h2>", times[T]); //TIME
-            printf("<b>Dinheiro: $%.2f</b><br>", money); //Dinheiro
-            printf("<b>Aposta: $%.2f</b>", deal);
-            //Formulario
-            printf("<form action=\"\">");
-            printf("Qual o seu palpite?<br>");
-            printf("<select name=\"a\">");
-            printf("<option value=\"0\" selected>0");
-            printf("<option value=\"1\">1");
-            printf("<option value=\"2\">2");
-            printf("<option value=\"3\">3");
-            printf("<option value=\"4\">4");
-            printf("</select>x");
-            printf("<select name=\"b\">");
-            printf("<option value=\"0\" selected>0");
-            printf("<option value=\"1\">1");
-            printf("<option value=\"2\">2");
-            printf("<option value=\"3\">3");
-            printf("<option value=\"4\">4");
-            printf("</select>");
-            printf("<br>");
-            printf("<input type=\"submit\" value=\"Vai!\">");
-            printf("</form>");
-            printf("</div>");
-        }
-    }
     printf("<a href=\"http://cap.dc.ufscar.br/~743525/game.html\"><h2>Início</h2></a>\n");
+    printf("</div>");
     printf("</body>");
     printf("</html>");
 
