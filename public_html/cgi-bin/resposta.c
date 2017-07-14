@@ -1,47 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-float lerDinheiro()
+float lerDinheiro(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
     float money;
-    FILE *arquivo = fopen("money.txt", "r");
+    FILE *arquivo = fopen(aux, "r");
     fscanf(arquivo, "%f", &money);
     fclose(arquivo);
     return money;
 }
 
-int lerT()
+int lerT(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "T.txt");
     int T;
-    FILE *arquivo=fopen("T.txt", "r");
+    FILE *arquivo=fopen(aux, "r");
     fscanf(arquivo, "%d", &T);
     fclose(arquivo);
     return T;
 }
 
-float lerAposta()
+float lerAposta(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "deal.txt");
     float deal;
-    FILE *arquivo=fopen("deal.txt", "r");
+    FILE *arquivo=fopen(aux, "r");
     fscanf(arquivo, "%f", &deal);
     fclose(arquivo);
     return deal;
 }
 
-void criarDinheiro(float money)
+void criarDinheiro(float money, char *nome)
 {
-    FILE *arquivo=fopen("money.txt", "w");
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
+    FILE *arquivo=fopen(aux, "w");
     fprintf(arquivo, "%f", money);
     fclose(arquivo);
 }
 
 int main()
 {
-    float deal=lerAposta();
-    float money=lerDinheiro();
-    float aux;
+    char *pData=NULL;
+    char nome[50];
     int A, B, X, Y, T;
+    pData=getenv("QUERY_STRING");
+    sscanf(pData,"a=%d&b=%d&name=%s", &X, &Y, nome);
+
+    float deal=lerAposta(nome);
+    float money=lerDinheiro(nome);
+    float aux;
     char times[51][50];
 
     FILE *arquivo = fopen("time.txt", "r");
@@ -52,15 +70,11 @@ int main()
     }
     fclose(arquivo);
 
-    T=lerT();
+    T=lerT(nome);
 
     srand(time(NULL));
     A=rand()%5;
     B=rand()%5;
-
-    char *pData=NULL;
-    pData=getenv("QUERY_STRING");
-    sscanf(pData,"a=%d&b=%d", &X, &Y);
 
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
@@ -116,15 +130,24 @@ int main()
     money=money+aux;
     if(money<=0)
     {
-        printf("<br><a href=lose.cgi>Continuar</a><br>");
+        printf("<br><form action=\"lose.cgi\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+        printf("<input type=\"submit\" value=\"Continuar\">");
+        printf("</form><br>");
     }
     else if(money>=100)
     {
-        printf("<br><a href=win.cgi>Continuar</a><br>");
+        printf("<br><form action=\"win.cgi\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+        printf("<input type=\"submit\" value=\"Continuar\">");
+        printf("</form><br>");
     }
     else
     {
-        printf("<br><a href=newgame.cgi>Continuar</a><br>");
+        printf("<br><form action=\"newgame.cgi\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+        printf("<input type=\"submit\" value=\"Continuar\">");
+        printf("</form><br>");
     }
     printf("<b>Dinheiro: $%.2f</b>", money);
     printf("</div>");
@@ -133,7 +156,7 @@ int main()
     printf("</body>");
     printf("</html>");
 
-    criarDinheiro(money);
+    criarDinheiro(money, nome);
 
     return 0;
 }

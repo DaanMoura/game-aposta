@@ -1,18 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-float lerDinheiro()
+float lerDinheiro(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
     float money;
-    FILE *arquivo = fopen("money.txt", "r");
+    FILE *arquivo = fopen(aux, "r");
     fscanf(arquivo, "%f", &money);
     fclose(arquivo);
     return money;
 }
 
+void limparArquivos(char *nome)
+{
+    char aux[50];
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
+    remove(aux);
+    strcpy(aux, nome);
+    strcat(aux, "T.txt");
+    remove(aux);
+    strcpy(aux, nome);
+    strcat(aux, "deal.txt");
+    remove(aux);
+    strcpy(aux, nome);
+}
+
 int main()
 {
-    float money=lerDinheiro();
+    char *pData=NULL;
+    char nome[50];
+    pData=getenv("QUERY_STRING");
+    sscanf(pData,"name=%s", nome);
+    float money=lerDinheiro(nome);
 
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
@@ -35,6 +58,8 @@ int main()
     printf("</div>");
     printf("</body>");
     printf("</html>");
+
+    limparArquivos(nome);
 
     return 0;
 }

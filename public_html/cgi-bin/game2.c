@@ -1,26 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-float lerDinheiro()
+float lerDinheiro(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
     float money;
-    FILE *arquivo = fopen("money.txt", "r");
+    FILE *arquivo = fopen(aux, "r");
     fscanf(arquivo, "%f", &money);
     fclose(arquivo);
     return money;
 }
 
-void criarAposta(float aposta)
+void criarAposta(float aposta, char *nome)
 {
-    FILE *arquivo=fopen("deal.txt", "w");
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "deal.txt");
+    FILE *arquivo=fopen(aux, "w");
     fprintf(arquivo, "%f", aposta);
     fclose(arquivo);
 }
 
-int lerT()
+int lerT(char *nome)
 {
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "T.txt");
     int T;
-    FILE *arquivo=fopen("T.txt", "r");
+    FILE *arquivo=fopen(aux, "r");
     fscanf(arquivo, "%d", &T);
     fclose(arquivo);
     return T;
@@ -29,10 +39,9 @@ int lerT()
 int main()
 {
     char *pData=NULL;
-    float money=lerDinheiro();
     float deal;
     int T;
-    char times[51][50];
+    char times[51][50], nome[50];
 
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
@@ -42,17 +51,21 @@ int main()
     }
     fclose(arquivo);
 
-    T=lerT();
+    pData=getenv("QUERY_STRING");
+    sscanf(pData, "x=%f&name=%s", &deal, nome);
+
+    float money=lerDinheiro(nome);
 
     if(money>=1)
     {
-        pData=getenv("QUERY_STRING");
-        sscanf(pData, "x=%f", &deal);
+
     }
     else
     {
         deal=money;
     }
+
+    T=lerT(nome);
 
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
@@ -73,12 +86,18 @@ int main()
     if(deal>money)
     {
         printf("<p>Dinheiro insuficiente. Faça outra aposta</p>");
-        printf("<a href=\"newaposta.cgi\">continuar</a>");
+        printf("<br><form action=\"newaposta.cgi\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+        printf("<input type=\"submit\" value=\"Continuar\">");
+        printf("</form><br>");
     }
     else if(deal<1 && money>=1)
     {
         printf("<p>A aposta mínima é $1. Faça outra aposta</p>");
-        printf("<a href=\"newaposta.cgi\">continuar</a>");
+        printf("<br><form action=\"newaposta.cgi\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+        printf("<input type=\"submit\" value=\"Continuar\">");
+        printf("</form><br>");
     }
     else
     {
@@ -105,6 +124,7 @@ int main()
         printf("</select>");
         printf("<br>");
         printf("<input type=\"submit\" value=\"Vai!\">");
+        printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("</form>");
         printf("</div>");
     }
@@ -113,7 +133,7 @@ int main()
     printf("</body>");
     printf("</html>");
 
-    criarAposta(deal);
+    criarAposta(deal, nome);
 
     return 0;
 }

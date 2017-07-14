@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-void criarT(int T)
+void criarT(int T, char *nome)
 {
-    FILE *arquivo=fopen("T.txt", "w");
+    char aux[20];
+    strcpy(aux, nome);
+    strcat(aux, "T.txt");
+    FILE *arquivo=fopen(aux, "w");
     fprintf(arquivo, "%d", T);
     fclose(arquivo);
 }
@@ -12,9 +16,14 @@ void criarT(int T)
 
 int main()
 {
+    char *pData=NULL;
     char times[51][50];
     int T;
+    char nome[50], aux[50];
     float money;
+
+    pData=getenv("QUERY_STRING");
+    sscanf(pData, "name=%s", nome);
 
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
@@ -27,12 +36,14 @@ int main()
     srand(time(NULL));
     money=rand()%31 + 30;
 
-    FILE *pMoney = fopen("money.txt", "w");
+    strcpy(aux, nome);
+    strcat(aux, "money.txt");
+    FILE *pMoney = fopen(aux, "w");
     fprintf(pMoney, "%f", money);
     fclose(pMoney);
 
     T=rand()%11;
-    criarT(T);
+    criarT(T, nome);
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
@@ -59,6 +70,7 @@ int main()
     printf("Qual a sua aposta?<br>");
     printf("<label><input name=\"x\" size=\"3\"></label><br>");
     printf("<input type=\"submit\" value=\"Apostar\">");
+    printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
     printf("</form>");
     printf("</div>");
     printf("<a href=\"http://cap.dc.ufscar.br/~743525/game.html\"><h2>Sair</h2></a>\n");
