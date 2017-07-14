@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bolão Virtual</title>
+  <link rel="stylesheet" href="game.css">
+  <link rel="icon" type="image/png" href="ball.png" />
+  </head>
+
+<body>
+  <div class=fundo>
+    <div class="container">
+    <img src="bolao.png" width="320" height="205" />
+</div>
+  <audio autoplay>
+      <source src="copa.mp3" type="audio/mpeg">
+    </audio>
+  <div id=resumo>
+    <p>
+   Será que você consegue $100 apostando em partidas de futebol?
+    </p>
+  </div>
+
+  <div id=regras>
+    <h3>Regras</h3>
+      <ul>
+        <li>Você começa com um dinheiro aleatório de $30 a $60;</li>
+        <li>O jogo é de apostas;</li>
+        <li>Aposta mínima: $1; </li>
+        <li>Se acertar o resultado exato ganha o dobro da aposta;</li>
+        <li>Se acertar pelo menos o time ganhador(ou se houve empate) ganha a aposta;</li>
+        <li>Se errar tudo, perde o que apostou;</li>
+        <li>Perde se zerar o dinheiro;</li>
+        <li>Ganha se conseguir o objetivo($100).</li>
+      </ul>
+  </div>
+  <a href=cgi-bin/game.cgi><h2>Jogar</h2></a>
+  </div>
+  </body>
+</html>

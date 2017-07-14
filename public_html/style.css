@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding: 0;
+    background-color: firebrick;
+}
+
+#todo{
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    right: 25%;
+    bottom: 25%;
+    font-size: 400%;
+}
+#todo h{
+    font-family: fantasy;
+    font-variant: small-caps;
+    color: darkslategray;
+    background-color: #FFF;
+}
+#todo p{
+    padding-left: 2%;
+    font-size: 30%;
+    color:#FFF;
+    font-family: serif;
+}
+
