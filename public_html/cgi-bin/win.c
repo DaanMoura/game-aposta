@@ -1,9 +1,11 @@
+//PÁGINA QUANDO GANHA
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+//Módulo para ler o arquivo que armazena o dinheiro
 float lerDinheiro(char *nome)
-{
+{   
     char aux[20];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
@@ -14,6 +16,7 @@ float lerDinheiro(char *nome)
     return money;
 }
 
+//Módulo para limpar os arquivos para o servidor ficar livre de arquivos que não são mais úteis
 void limparArquivos(char *nome)
 {
     char aux[50];
@@ -33,20 +36,27 @@ int main()
 {
     char *pData=NULL;
     char nome[50];
+    
+    //Lendo a URL
     pData=getenv("QUERY_STRING");
     sscanf(pData,"name=%s", nome);
+    
+    //Declaração e atribuição do dinheiro
     float money=lerDinheiro(nome);
 
+    //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
     printf("<html>");
+    //HEAD
     printf("<head>");
     printf("<meta charset=\"utf-8\">");
     printf("<title>Bolão Virtual</title>");
     printf("<link rel=\"icon\" type=\"image/png\" href=\"http://cap.dc.ufscar.br/~743525/ball.png\"/>");
     printf("<link rel=\"stylesheet\" href=\"http://cap.dc.ufscar.br/~743525/win.css\">");
     printf("</head>");
+    //BODY
     printf("<body>");
     printf("<div class=fundo>");
     printf("<div class=container>");
