@@ -35,7 +35,7 @@
       <br>
       <form action="cgi-bin/game.cgi">
           Digite o seu nome(sem espaços e sem acentos)<br>
-          <label><input name="name"></label><br>
+          <label><input type="text" name="name" pattern="[A-Za-z]{1,10}" maxlength="10"></label><br>
           <input type="submit" value="Jogar">
       </form>
       <br>
