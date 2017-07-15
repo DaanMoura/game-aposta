@@ -1,14 +1,6 @@
 # game-aposta
-Trabalho de Construção de Algoritmos e Programas - Profa Vânia Neris (BCC 2017 - UFSCar)
+<h2>Trabalho de Construção de Algoritmos e Programas </h2>
+<h3>Profa Vânia Neris (BCC 2017 - UFSCar)</h3>
 
--Começa com um dinheiro aleatório de $10 a $100<br>
--Objetivo: conseguir $1000<br>
--O jogo é de apostas<br>
--aposta mínima: $1 <br>
--Se acertar o resultado exato ganha o que apostou<br>
--Se acertar pelo menos o time ganhador(ou se houve empate) ganha a metade da aposta<br>
--Se errar tudo, perde o que apostou<br>
--Perde se zerar o dinheiro<br>
--Ganha se conseguir o objetivo($1000)<br>
+Autores: <a href="https://github.com/DaanMoura">Daniel Moura</a> e <a href="https://github.com/Vilardino">Guilherme Vilardino</a>
 
-O jogo será implementado em uma página HTML atravez de CGI.
