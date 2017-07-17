@@ -48,3 +48,37 @@ div.fundo{
     height: auto;
 }
 
+input[type=button], input[type=submit], input[type=reset]{
+  background-color: green;
+  color:#c6ffc6;
+  border-color:#026d02;
+  border-style: solid;
+  border-radius: 10px;
+  margin: 4px 2px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover{
+  background-color:#33b133;
+}
+
+input {
+    border-style: solid;
+    border-color:#026d02;
+    border-radius: 5px;
+    margin: 4px 2px;
+}
+
+select{
+    background-color:#8ee18e;
+    border-style: solid;
+    border-color:#026d02;
+    border-radius: 5px;
+    margin: 4px 2px;
+}
+
+option{
+  background-color:#c7dfc7;
+}
+
