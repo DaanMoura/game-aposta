@@ -1,4 +1,4 @@
-/*PÁGINA 2  
+/*PÁGINA 2
   campo para palpite
   resposta caso o valor apostado não for válido*/
 #include <stdio.h>
@@ -48,7 +48,7 @@ int main()
     float deal;
     int T;
     char times[51][50], nome[50];
-    
+
     //Leitura do arquivo de times
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
@@ -57,7 +57,7 @@ int main()
         T++;
     }
     fclose(arquivo);
-    
+
     //Lendo a URL
     pData=getenv("QUERY_STRING");
     sscanf(pData, "x=%f&name=%s", &deal, nome);//Leitura da aposta e do nome do jogador
@@ -72,12 +72,12 @@ int main()
 
     T=lerT(nome);//Atriuição de T
 
-    //[GERANDO HTML]
+    //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
     printf("<html>");
-    //HEAD 
+    //HEAD
     printf("<head>");
     printf("<meta charset=\"utf-8\">");
     printf("<title>Bolão Virtual</title>");
@@ -91,7 +91,7 @@ int main()
     printf("<img src=\"http://cap.dc.ufscar.br/~743525/bolao.png\" width=\"320\" height=\"205\" />");
     printf("</div>");
     if(deal>money)
-    {   //A aposta não tem como ser maior que o dinheiro 
+    {   //A aposta não tem como ser maior que o dinheiro
         printf("<p>Dinheiro insuficiente. Faça outra aposta</p>");
         printf("<br><form action=\"newaposta.cgi\">");
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);

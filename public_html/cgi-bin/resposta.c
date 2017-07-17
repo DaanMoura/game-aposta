@@ -1,8 +1,11 @@
+/*PÁGINA DO RESULTADO
+  Aqui aparece a resposta:se acertou, se errouo ou acertou o time ganhador*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
+//Módulo para ler o arquivo que o dinheiro está armazenado
 float lerDinheiro(char *nome)
 {
     char aux[20];
@@ -15,6 +18,7 @@ float lerDinheiro(char *nome)
     return money;
 }
 
+//Módulo para ler T
 int lerT(char *nome)
 {
     char aux[20];
@@ -27,6 +31,7 @@ int lerT(char *nome)
     return T;
 }
 
+//Módulo para ler o arquivo que contém o valor da aposta
 float lerAposta(char *nome)
 {
     char aux[20];
@@ -39,6 +44,7 @@ float lerAposta(char *nome)
     return deal;
 }
 
+//Módulo para criar o arquivo que guardará o dinheiro
 void criarDinheiro(float money, char *nome)
 {
     char aux[20];
@@ -54,14 +60,17 @@ int main()
     char *pData=NULL;
     char nome[50];
     int A, B, X, Y, T;
-    pData=getenv("QUERY_STRING");
-    sscanf(pData,"a=%d&b=%d&name=%s", &X, &Y, nome);
-
-    float deal=lerAposta(nome);
-    float money=lerDinheiro(nome);
     float aux;
     char times[51][50];
 
+    //Lendo a URL
+    pData=getenv("QUERY_STRING");
+    sscanf(pData,"a=%d&b=%d&name=%s", &X, &Y, nome);
+
+    float deal=lerAposta(nome);//Declaração e atribuição da variável deal
+    float money=lerDinheiro(nome);//Declaração e atribuição da variável money
+
+    //Lendo o arquivo de times
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
     while(fscanf(arquivo, "%s", times[T])!=EOF)
@@ -70,22 +79,26 @@ int main()
     }
     fclose(arquivo);
 
-    T=lerT(nome);
+    T=lerT(nome);//Atriuição de T
 
+    //Sorteando o resultado da partida
     srand(time(NULL));
     A=rand()%5;
     B=rand()%5;
 
+    //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
     printf("<html>");
+    //HEAD
     printf("<head>");
     printf("<meta charset=\"utf-8\">");
     printf("<title>Bolão Virtual</title>");
     printf("<link rel=\"icon\" type=\"image/png\" href=\"http://cap.dc.ufscar.br/~743525/ball.png\"/>");
     printf("<link rel=\"stylesheet\" href=\"http://cap.dc.ufscar.br/~743525/jogo.css\">");
     printf("</head>");
+    //BODY
     printf("<body>");
     printf("<div class=fundo>");
     printf("<div class=container>");
@@ -96,7 +109,7 @@ int main()
     printf("<h3>Seu palpite: %d X %d</h3>", X, Y);
     printf("<h3>Resultado: %d X %d</h3>", A, B);
     if(X==A && Y==B)
-    {
+    {   //Se o palpite for igual a aposta, o jogador ganha o dobro do que apostou
         printf("<audio autoplay>");
         printf("<source src=\"http://cap.dc.ufscar.br/~743525/acerto.mp3\" type=\"audio/mpeg\">");
         printf("</audio>");
@@ -104,7 +117,7 @@ int main()
         printf("Na mosca!\nVocê ganhou $%.2f\n", aux);
     }
     else if(A==B && X==Y)
-    {
+    {   //Se houve empate e o palpite do jogador também for um empate, o jogador ganha o que apostou
         printf("<audio autoplay>");
         printf("<source src=\"http://cap.dc.ufscar.br/~743525/acerto.mp3\" type=\"audio/mpeg\">");
         printf("</audio>");
@@ -112,7 +125,7 @@ int main()
         printf("Realmente teve empate.\nVocê ganhou $%.2f\n", aux);
     }
     else if((A>B && X>Y)||(A<B && X<Y))
-    {
+    {   //Se o jogador acertar o time vencedor, ganha o que apostou
         printf("<audio autoplay>");
         printf("<source src=\"http://cap.dc.ufscar.br/~743525/acerto.mp3\" type=\"audio/mpeg\">");
         printf("</audio>");
@@ -120,7 +133,7 @@ int main()
         printf("Você acertou o time vencedor.\nVocê ganhou $%.2f\n", aux);
     }
     else if(X!=A || Y!=B)
-    {
+    {   //Se o palpite for totalmente diferente do resultado, o jogador perde o que apostou
         printf("<audio autoplay>");
         printf("<source src=\"http://cap.dc.ufscar.br/~743525/erro.mp3\" type=\"audio/mpeg\">");
         printf("</audio>");
@@ -129,21 +142,21 @@ int main()
     }
     money=money+aux;
     if(money<=0)
-    {
+    {   //Se o dinheiro for menor ou igual a zero, o jogador é rediricionado a página de game over
         printf("<br><form action=\"lose.cgi\">");
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("<input type=\"submit\" value=\"Continuar\">");
         printf("</form><br>");
     }
     else if(money>=100)
-    {
+    {   //Se o dinheiro for maior ou igual a 100, o jogador é rediricionado a página de YOU WIN
         printf("<br><form action=\"win.cgi\">");
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("<input type=\"submit\" value=\"Continuar\">");
         printf("</form><br>");
     }
     else
-    {
+    {   //Fluxo padrão
         printf("<br><form action=\"newgame.cgi\">");
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("<input type=\"submit\" value=\"Continuar\">");
@@ -156,7 +169,7 @@ int main()
     printf("</body>");
     printf("</html>");
 
-    criarDinheiro(money, nome);
+    criarDinheiro(money, nome);//Criar arquivo para guardar o dinheiro
 
     return 0;
 }

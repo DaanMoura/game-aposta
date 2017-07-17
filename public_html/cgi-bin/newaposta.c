@@ -1,8 +1,11 @@
+/*PÁGINA CONDICIONAL(caso a aposta não for válida)
+  campo para a aposta*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
+//Módulo para ler o arquivo da variável T
 int lerT(char *nome)
 {
     char aux[20];
@@ -15,6 +18,7 @@ int lerT(char *nome)
     return T;
 }
 
+//Módulo para ler o dinheiro
 float lerDinheiro(char *nome)
 {
     char aux[20];
@@ -32,14 +36,15 @@ int main()
     char *pData=NULL;
     char times[51][50], nome[50];
     int T;
-    //int i;
 
+    //Lendo a URL
     pData=getenv("QUERY_STRING");
-    sscanf(pData, "name=%s", nome);
+    sscanf(pData, "name=%s", nome);//Leitura do nome
 
+    //Atribuição do dinheiro
     float money=lerDinheiro(nome);
 
-
+    //Leitura do arquivo de times
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
     while(fscanf(arquivo, "%s", times[T])!=EOF)
@@ -48,20 +53,21 @@ int main()
     }
     fclose(arquivo);
 
+    T=lerT(nome);//Atriuição de T
 
-    //T=rand()%11;
-    T=lerT(nome);
+    //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
     printf("<html>");
+    //HEAD
     printf("<head>");
     printf("<meta charset=\"utf-8\">");
     printf("<title>Bolão Virtual</title>");
     printf("<link rel=\"icon\" type=\"image/png\" href=\"http://cap.dc.ufscar.br/~743525/ball.png\"/>");
     printf("<link rel=\"stylesheet\" href=\"http://cap.dc.ufscar.br/~743525/jogo.css\">");
     printf("</head>");
-
+    //BODY
     printf("<body>");
     printf("<div class=fundo>");
     printf("<div class=container>");
@@ -75,7 +81,7 @@ int main()
     printf("Qual a sua aposta?<br>");
     printf("<label><input name=\"x\" size=\"3\"></label><br>");
     printf("<input type=\"submit\" value=\"Apostar\">");
-    printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
+    printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);//Campo oculto
     printf("</form>");
     printf("</div>");
     printf("<a href=\"http://cap.dc.ufscar.br/~743525/game.html\"><h2>Sair</h2></a>\n");
