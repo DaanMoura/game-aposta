@@ -1,4 +1,4 @@
-//PÁGINA QUANDO PERDE  
+//PÁGINA QUANDO PERDE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,15 +37,15 @@ int main()
 {
     char *pData=NULL;
     char nome[50];
-    
+
     //Lendo a URL
     pData=getenv("QUERY_STRING");
     sscanf(pData,"name=%s", nome);
-    
+
     //Declaração e atribuição do dinheiro
     float money=lerDinheiro(nome);
-    
-    //[GERAR HTML]  
+
+    //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
     printf("<html lang=\"pt\">");
@@ -59,6 +59,10 @@ int main()
     printf("</head>");
     //BODY
     printf("<body>");
+    //audio
+    printf("<audio volume=\"0.1\" autoplay>");
+    printf("<source src=\"http://cap.dc.ufscar.br/~743525/silvioperdeu.mp3\" type=\"audio/mpeg\">");
+    printf("</audio>");
     printf("<div class=fundo>");
     printf("<div class=container>");
     printf("<img src=\"http://cap.dc.ufscar.br/~743525/bolao.png\" width=\"320\" height=\"205\" />");

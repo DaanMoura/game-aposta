@@ -5,7 +5,7 @@
 
 //Módulo para ler o arquivo que armazena o dinheiro
 float lerDinheiro(char *nome)
-{   
+{
     char aux[20];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
@@ -36,11 +36,11 @@ int main()
 {
     char *pData=NULL;
     char nome[50];
-    
+
     //Lendo a URL
     pData=getenv("QUERY_STRING");
     sscanf(pData,"name=%s", nome);
-    
+
     //Declaração e atribuição do dinheiro
     float money=lerDinheiro(nome);
 
@@ -58,6 +58,10 @@ int main()
     printf("</head>");
     //BODY
     printf("<body>");
+    //audio
+    printf("<audio volume=\"0.1\" autoplay>");
+    printf("<source src=\"http://cap.dc.ufscar.br/~743525/silvioganhou.mp3\" type=\"audio/mpeg\">");
+    printf("</audio>");
     printf("<div class=fundo>");
     printf("<div class=container>");
     printf("<img src=\"http://cap.dc.ufscar.br/~743525/bolao.png\" width=\"320\" height=\"205\" />");
