@@ -74,6 +74,7 @@ int main()
     {
         printf("<p>Você tem menos que $1.<br>Aposta automática: <b>$%.2f</b></p>", money);
         printf("<br><form action=\"game2.cgi\">");
+	    printf("<input type=\"hidden\" name=\"x\" value=\"%f\">", money);
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("<input type=\"submit\" value=\"Continuar\">");
         printf("</form><br>");
