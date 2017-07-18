@@ -96,7 +96,7 @@ int main()
     {   //Fluxo padrão
         printf("<form action=\"game2.cgi\">");
         printf("Qual a sua aposta?<br>");
-        printf("<label><input name=\"x\" size=\"3\"></label><br>");
+        printf("<label><input name=\"x\" size=\"3\" required></label><br>");
         printf("<input type=\"submit\" value=\"Apostar\">");
         printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);
         printf("</form>");

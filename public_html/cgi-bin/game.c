@@ -29,7 +29,7 @@ int main()
     //Lendo a URL
     pData=getenv("QUERY_STRING");
     sscanf(pData, "name=%s", nome); //Armazenando o nome
-    
+
     //Lendo o arquivo de times
     FILE *arquivo = fopen("time.txt", "r");
     T=0;
@@ -38,7 +38,7 @@ int main()
         T++;
     }
     fclose(arquivo);
-    
+
     //Sorteando o dinheiro
     srand(time(NULL));
     money=rand()%31 + 30;
@@ -53,7 +53,7 @@ int main()
     //Sorteio de T(linha a ser lida de time.txt) e chamada da função
     T=rand()%11;
     criarT(T, nome);
-    
+
     //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
     printf("<!DOCTYPE html>");
@@ -68,7 +68,7 @@ int main()
     printf("</head>");
     //BODY
     printf("<body>");
-    //audio 
+    //audio
     printf("<audio autoplay>");
     printf("<source src=\"http://cap.dc.ufscar.br/~743525/start.mp3\" type=\"audio/mpeg\">");
     printf("</audio>");
@@ -82,7 +82,7 @@ int main()
     //formulario
     printf("<form action=\"game2.cgi\">");
     printf("Qual a sua aposta?<br>");
-    printf("<label><input name=\"x\" size=\"3\"></label><br>");
+    printf("<label><input name=\"x\" size=\"3\" required></label><br>");
     printf("<input type=\"submit\" value=\"Apostar\">");
     printf("<input type=\"hidden\" name=\"name\" value=\"%s\">", nome);//Campo oculto para passar o nome pra URL da próxima página
     printf("</form>");
