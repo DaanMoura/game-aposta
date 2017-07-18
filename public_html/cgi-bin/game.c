@@ -52,7 +52,7 @@ int main()
 
     //Sorteio de T(linha a ser lida de time.txt) e chamada da função
     T=rand()%11;
-    criarT(T, nome)
+    criarT(T, nome);
     
     //[GERAR HTML]
     printf("%s%c%c\n","Content-Type:text/html;charset=UTF-8",13,10);
