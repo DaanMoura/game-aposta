@@ -9,7 +9,7 @@
 //Módulo para criar arquivo da variável T
 void criarT(int T, char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "T.txt");
     FILE *arquivo=fopen(aux, "w");
@@ -23,7 +23,7 @@ int main()
     char *pData=NULL;
     char times[51][50];
     int T; //T irá informar a linha arquivo time.txt
-    char nome[50], aux[50];
+    char nome[10], aux[10];
     float money;
 
     //Lendo a URL

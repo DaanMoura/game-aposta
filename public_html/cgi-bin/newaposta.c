@@ -8,7 +8,7 @@
 //Módulo para ler o arquivo da variável T
 int lerT(char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "T.txt");
     int T;
@@ -21,7 +21,7 @@ int lerT(char *nome)
 //Módulo para ler o dinheiro
 float lerDinheiro(char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
     float money;
@@ -34,7 +34,7 @@ float lerDinheiro(char *nome)
 int main()
 {
     char *pData=NULL;
-    char times[51][50], nome[50];
+    char times[51][50], nome[10];
     int T;
 
     //Lendo a URL

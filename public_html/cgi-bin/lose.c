@@ -6,7 +6,7 @@
 //Módulo para ler o arquivo que armazena o dinheiro
 float lerDinheiro(char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
     float money;
@@ -19,7 +19,7 @@ float lerDinheiro(char *nome)
 //Módulo para limpar os arquivos para o servidor ficar livre de arquivos que não são mais úteis
 void limparArquivos(char *nome)
 {
-    char aux[50];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
     remove(aux);
@@ -36,7 +36,7 @@ void limparArquivos(char *nome)
 int main()
 {
     char *pData=NULL;
-    char nome[50];
+    char nome[10];
 
     //Lendo a URL
     pData=getenv("QUERY_STRING");

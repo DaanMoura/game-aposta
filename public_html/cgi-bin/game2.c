@@ -8,7 +8,7 @@
 //Módulo para ler o arquivo que o dinheiro está armazenado
 float lerDinheiro(char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "money.txt");
     float money;
@@ -21,7 +21,7 @@ float lerDinheiro(char *nome)
 //Módulo para criar o arquivo com o valor apostado
 void criarAposta(float aposta, char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "deal.txt");
     FILE *arquivo=fopen(aux, "w");
@@ -32,7 +32,7 @@ void criarAposta(float aposta, char *nome)
 //Módulo para ler T
 int lerT(char *nome)
 {
-    char aux[20];
+    char aux[10];
     strcpy(aux, nome);
     strcat(aux, "T.txt");
     int T;
@@ -47,7 +47,7 @@ int main()
     char *pData=NULL;
     float deal;
     int T;
-    char times[51][50], nome[50];
+    char times[51][50], nome[10];
 
     //Leitura do arquivo de times
     FILE *arquivo = fopen("time.txt", "r");
